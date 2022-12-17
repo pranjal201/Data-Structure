@@ -19,9 +19,9 @@ class MyQueue:
 
     def empty(self) -> bool:
         if not self.stackOne:
-            return 1
+            return True
         else:
-            return 0
+            return False
         
 
 
