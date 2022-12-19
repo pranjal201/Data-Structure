@@ -10,7 +10,7 @@
 # Input: temperatures = [73,74,75,71,69,72,76,73]
 # Output: [1,1,4,2,1,1,0,0]
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+    def dailyTemperatures(self, temperatures: list[int]) -> list[int]:
         res = [0] * len(temperatures)
         stack = [] # pair: [temp,index]
 
@@ -20,3 +20,9 @@ class Solution:
                 res[stackInd] = (i-stackInd)
             stack.append([t,i])
         return res
+
+if __name__ == '__main__':
+    temperatures = [73,74,75,71,69,72,76,73]
+    obj = Solution()
+    l=obj.dailyTemperatures(temperatures)
+    print(l)
