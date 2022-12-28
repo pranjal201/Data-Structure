@@ -18,45 +18,20 @@
 # Input: strs = ["a"]
 # Output: [["a"]]
 
-#Function to check wether given string is an Anagram or 
-# not
-def isAnagram(s:str, t:str)->bool:
-        if len(s) != len(t):
-            return False
-        countS = {}
-        countT = {}
-
-        for i in range(0,len(s)):
-            countS[s[i]] = 1 + countS.get(s[i],0)
-            countT[t[i]] = 1 + countT.get(t[i],0)
-        
-        for k in countS:
-            if countS[k] != countT.get(k,0):
-                return False
-        return True
-
+# using hashmap to reduce the time complexity from O(m.nlogn) to O(m.n.26)
+import collections
 def groupAnagrams(strings:list[str])->list[list[str]]:
-    # Setting the boundary condition for empty string and single stringelement
-    length=len(strings)
-    if length <= 1:
-        return list(strings)
+   res = collections.defaultdict(list)
 
-    finalResult = [[strings[0]]]
-    i =1
-    lock =0
-    while i<length:
-        for j in finalResult:
-            lock = 0
-            if isAnagram(strings[i],j[0]):
-                j.append(strings[i])
-                lock = 1
-                break
-        if lock == 0:
-            finalResult.append([strings[i]])
-        print(finalResult)
-        i += 1
-    return finalResult
-    
+   for s in strings:
+       count = [0] * 26 
+
+       for c in s:
+           count[ord(c) - ord("a")] +=1 
+       res[tuple(count)].append(s)
+
+   return res.values()
+
 
 if __name__ == '__main__':
     input =["eat","tea","tan","ate","nat","bat"] 
